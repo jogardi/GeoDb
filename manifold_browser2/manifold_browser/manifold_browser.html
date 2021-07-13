@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Manifold Browser</title>
+		<style>
+			body { margin: 0; }
+			/* canvas { display: block; } */
+		</style>
+    </head>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js"></script> -->
+        <script src="node_modules/three/build/three.js"></script>
+        <script src="node_modules/three-orbitcontrols/OrbitControls.js"></script>
+        <script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+		<script>
+            let isImages = true;
+            let initial_radius = .01;
+            var Viewer = {
+                SPRITE_COUNT : 3,
+                init : function() {
+                    self = this;
+                    this.renderer = new THREE.WebGLRenderer({antialias : true, alpha: true}); // false, a bit faster without antialias                   
+                    this.renderer.setPixelRatio(window.devicePixelRatio);
+                    this.renderer.setSize(window.innerWidth, window.innerHeight);
+                    this.container = document.getElementById('display');
+                    this.container.appendChild(this.renderer.domElement);
+                    this.camera = new THREE.PerspectiveCamera( 80, window.innerWidth / window.innerHeight, 0.1, 1000 );
+                    this.camera.position.z = 5;
+                    this.scene = new THREE.Scene();
+                    this.group = new THREE.Object3D();
+                    this.scene.add(this.group);
+                    let raycaster = new THREE.Raycaster();
+
+                    this.controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
+                    this.spriteToLink = {};
+                    this.has_pressed = false;
+                    this.controls.autoRotate = true;
+                    this.controls.enableDamping = true;
+                    // this.controls.zoomSpeed = .5;
+                    this.prev_zoom = this.getZoom();
+                    this.last_zoom_time = new Date();
+                    this.sprites = [];
+                    this.linkSet = new Set();
+                    this.should_load = true;
+
+        
+
+
+            
+            
+                    this.render();
+
+                    function load_more() {
+                        if (self.query_link != null && self.should_load) {
+                            load_data(self.query_link, self.search_radius);
+                        }
+                        setTimeout(load_more, 20);
+                    }
+                    // load_more();
+                    
+
+                    let mousedown_time = null;
+                    $(this.renderer.domElement).on('mousedown', function() {
+                        console.log("mousedown");
+                        mousedown_time = new Date();
+                        self.has_pressed = true;
+                        self.controls.autoRotate = false;
+
+                    });
+                    let downHandler = $(this.renderer.domElement).on('mouseup', function(e) {
+                        if (new Date() - mousedown_time > 400) {
+                            return;
+                        }
+                        console.log(new Date() - mousedown_time);
+                        console.log("clicked");
+
+                        let mouse = new THREE.Vector2();
+                        mouse.x = (event.clientX / self.renderer.domElement.clientWidth) * 2 - 1;
+                        mouse.y =  - (event.clientY / self.renderer.domElement.clientHeight) * 2 + 1
+                        raycaster.setFromCamera(mouse, self.camera);
+                        let intersects = raycaster.intersectObjects(self.group.children);
+                        console.log(intersects);
+                        if (intersects.length > 0) {
+                            // let clicked = self.spriteToLink[intersects[0]];
+                            let clicked = intersects[0].object.link_i;
+                            self.group.children = [];
+                            console.log("clicked link " + clicked);
+                            self.query_link = clicked;
+                            self.search_radius = self.initial_radius;
+                            self.camera.position.set(0, 0, 5);
+                            self.prev_zoom = self.getZoom();
+                            // self.should_load = true;
+                            load_data(self.query_link, self.search_radius);
+                        }
+                    });
+
+                    // end is misleading. It is really at the end of rotations
+                    // and at every single change in zoom. So it doesn't wait for the end of the zoom.
+                    self.controls.addEventListener("end", function() {
+                        self.last_zoom_time = new Date();
+                    });
+                    console.log("finished");
+                },
+                getZoom: function() {
+                    return self.controls.target.distanceTo( self.controls.object.position );
+                },
+                render : function() {
+                    var self = this;
+            
+                    this.controls.update();
+                    this.renderer.render(this.scene, this.camera);
+
+                    var zoom = self.getZoom();
+                    if (typeof self.initial_radius != "undefined" && new Date() - this.last_zoom_time > 750 && zoom > 1.4 * self.prev_zoom) {
+                        console.log("POWER UP!!" + self.initial_radius);
+                        self.search_radius = self.initial_radius * zoom;
+                        self.should_load = true;
+                        self.prev_zoom = zoom;
+                        load_data(self.query_link, self.search_radius);
+                    }
+
+            
+                    requestAnimationFrame(function() {self.render();});
+                },
+        };
+
+
+        function load_data(link, radius) {
+            console.log("loading more");
+            var self = this;
+            $.ajax({
+                type: "POST",
+                url: "/search", 
+                contentType: "application/json",
+                dataType: "json",
+                processData: false,
+                data: JSON.stringify({
+                    query_link: link,
+                    radius: radius 
+                }),
+                success: function(data) {
+                    console.log(data);
+                    Viewer.query_link = link;
+                    Viewer.search_radius = data.new_radius;
+                    // if "raw_data" in data) {}
+                    raw_data = data.raw_data
+                    Viewer.results = data;
+                    var numAdded = 0;
+                    function add_sprite(link_i, coordinates) {
+                        if (Viewer.linkSet.has(link_i)) {
+                            console.log("already there");
+                            return;
+                        }
+                        numAdded += 1;
+                        Viewer.linkSet.add(link_i)
+                        var texture = null;
+                        if (isImages) {
+                            // var imageObj = new Image();
+                            // imageObj.onload = function(){
+                            // texture = new THREE.TextureLoader().load(imageObj);
+                            // }
+                            // imageObj.crossOrigin="Anonymous";
+                            // imageObj.src = "https://dasion1.appspot.com.storage.googleapis.com/" + link_i;
+                            texture = new THREE.TextureLoader().load("https://dasion1.appspot.com.storage.googleapis.com/" + link_i);
+                            // imageObj.src = "https://cdn.glitch.com/4c9ebeb9-8b9a-4adc-ad0a-238d9ae00bb5%2Fmdn_logo-only_color.svg?1535749917189";
+                        } else {
+                            var canvas = document.createElement('canvas');
+                            var ctx = canvas.getContext("2d");
+                            max_y = 364/4;
+                            min_y = 72/4;
+                            canvas.width = 188;
+                            canvas.height = (max_y + min_y); 
+                            ctx.lineWidth= 4;
+
+                            y = 25 * (raw_data[i][0][1]) + min_y;
+                            ctx.beginPath();
+                            for (let j = 1; j < raw_data[i].length; j++) {
+                                ctx.moveTo(j - 1, canvas.height - y);
+                                y = 25 * raw_data[i][j][1] + min_y;
+                                // if (y > max_y) {
+                                //     max_y = y;
+                                // }
+                                // if (y < min_y) {
+                                //     min_y = y;
+                                // }
+                                ctx.lineTo(j, canvas.height - y);
+                            }
+                            ctx.stroke();
+                            // console.log("max_y " + max_y + " " + min_y);
+                            
+
+                            var texture = new THREE.Texture(canvas);
+                        }
+                        let material = new THREE.SpriteMaterial({ map: texture, transparent: true, sizeAttenuation: false });
+                        texture.minFilter = THREE.LinearFilter;
+                        texture.needsUpdate = true;
+                        let sprite = new THREE.Sprite(material);
+                        
+                        // sprite.scale.set(32, 32, 1.0);
+                        // sprite.position.set(0, 0, 0);
+                        sprite_radius = Viewer.search_radius * 5;
+                        sprite.position.set(sprite_radius * coordinates[0], sprite_radius * coordinates[1], sprite_radius * coordinates[2]);
+                        // root.position.x = 5;
+                        // root.add(sprite);
+                        Viewer.group.add(sprite);
+                        Viewer.spriteToLink[sprite] = link_i;
+                        sprite["link_i"] = link_i;
+                        // sprite.position.y = 5;
+                        // sprite.position.z = 5;
+                        sprite.scale.x = .2;
+                        sprite.scale.y = .2;
+
+                        if (Viewer.sprites.length == 0) {
+                            Viewer.initial_radius = Viewer.search_radius;
+                        }
+                        Viewer.sprites.push(sprite);
+                        console.log("num spirtes is " + Viewer.sprites.length, Viewer.search_radius);
+                        if (Viewer.sprites.length > 128) {
+                            Viewer.sprites.splice(32, 1);
+                        }
+    
+                    }
+
+
+                    var i = 0;
+                    let batchSize = 50;
+                    add_sprite(link, [0, 0, 0]);
+                    function batcher() {
+                        for (; i < Math.min(i + batchSize, data.results.length); i++) {
+                            link_i = data.results[i][0];
+                            coordinates = data.results[i][1];
+                            add_sprite(link_i, coordinates);
+                        }
+                        if (i < data.results.length) {
+                            setTimeout(batcher, 20);
+                        }
+                    }
+                    if (numAdded < 4) {
+                        console.log("turned off")
+                        Viewer.should_load = false;
+                    }
+                    batcher();
+                }
+            });
+        }
+        
+
+    window.onload = function() {
+        Viewer.init();
+        // load_data("mitbih_train_x.npy#" + Math.floor(80000 * Math.random()/16), initial_radius);
+        load_data("caltech256/256_ObjectCategories/219.theodolite/219_0004.jpg", initial_radius);
+    }; 
+    </script>
+    <body style="margin:0; padding: 0; overflow: hidden;">
+        <div id="display"></div>    
+    </body> 
+</html>
