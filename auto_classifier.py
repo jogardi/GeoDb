@@ -237,7 +237,7 @@ class LocalBayesClassifier:
             y_mean = torch.mean(neighbors_y, dim=0)
             centered_y = neighbors_y  # - y_mean
             pred_per_class = torch.zeros(len(num_per_class)).to(device)
-            densities = cov[-1, :-1] @ precision[:-1, :-1] @ centered_y  # [:, class_i]
+            densities = cov[-1, :-1] @ precision[:-1, :-1] @ centered_y
             # densities = cov[-1, :-1] @ centered_y#[:, class_i]
             for class_i in range(len(num_per_class)):
                 pred_per_class[class_i] = densities[class_i] / densities.sum()

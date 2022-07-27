@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/cmake-build-debug/tests/CMakeFiles/gtest"
+		},
+		{
+			"file" : "/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/cmake-build-debug/tests/CMakeFiles/gtest.rule"
+		},
+		{
+			"file" : "/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/cmake-build-debug/tests/CMakeFiles/gtest-complete.rule"
+		},
+		{
+			"file" : "/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/cmake-build-debug/tests/gtest/src/gtest-stamp/gtest-install.rule"
+		},
+		{
+			"file" : "/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/cmake-build-debug/tests/gtest/src/gtest-stamp/gtest-mkdir.rule"
+		},
+		{
+			"file" : "/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/cmake-build-debug/tests/gtest/src/gtest-stamp/gtest-download.rule"
+		},
+		{
+			"file" : "/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/cmake-build-debug/tests/gtest/src/gtest-stamp/gtest-update.rule"
+		},
+		{
+			"file" : "/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/cmake-build-debug/tests/gtest/src/gtest-stamp/gtest-patch.rule"
+		},
+		{
+			"file" : "/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/cmake-build-debug/tests/gtest/src/gtest-stamp/gtest-configure.rule"
+		},
+		{
+			"file" : "/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/cmake-build-debug/tests/gtest/src/gtest-stamp/gtest-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"gtest"
+		],
+		"name" : "gtest"
+	}
+}

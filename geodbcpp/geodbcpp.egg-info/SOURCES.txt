@@ -1,0 +1,6 @@
+geodbcpp.cpp
+setup.py
+geodbcpp.egg-info/PKG-INFO
+geodbcpp.egg-info/SOURCES.txt
+geodbcpp.egg-info/dependency_links.txt
+geodbcpp.egg-info/top_level.txt

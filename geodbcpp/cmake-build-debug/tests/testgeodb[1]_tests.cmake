@@ -1,0 +1,1 @@
+set( testgeodb_TESTS)

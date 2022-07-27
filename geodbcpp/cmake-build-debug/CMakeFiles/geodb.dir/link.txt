@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libgeodb.a  CMakeFiles/geodb.dir/src/PyModule.cpp.o CMakeFiles/geodb.dir/src/geodbcpp.cpp.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libgeodb.a
