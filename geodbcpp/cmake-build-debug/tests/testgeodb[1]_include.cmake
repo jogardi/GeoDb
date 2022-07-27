@@ -1,5 +1,0 @@
-if(EXISTS "/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/cmake-build-debug/tests/testgeodb[1]_tests.cmake")
-  include("/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/cmake-build-debug/tests/testgeodb[1]_tests.cmake")
-else()
-  add_test(testgeodb_NOT_BUILT testgeodb_NOT_BUILT)
-endif()

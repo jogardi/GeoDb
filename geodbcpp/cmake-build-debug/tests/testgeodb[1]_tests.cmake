@@ -1,1 +1,0 @@
-set( testgeodb_TESTS)
