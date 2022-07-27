@@ -8,5 +8,4 @@ PYBIND11_MODULE(geodbcpp, m) {
     m.def("loss_for_neighbors", &loss_for_neighbors, "loss_for_neighbors");
     m.def("loss_for_neighbors_block", &loss_for_neighbors_block, "loss_for_neighbors_block");
 
-//    return m.ptr();
 }

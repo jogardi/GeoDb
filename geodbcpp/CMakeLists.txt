@@ -16,8 +16,8 @@ file(GLOB SOURCES "src/**")
 
 add_library(geodb ${SOURCES})
 target_link_libraries(geodb PUBLIC "${TORCH_LIBRARIES}" Python::Python)
-pybind11_add_module(geodbpy PyModule.cpp)
-target_link_libraries(geodbpy PRIVATE geodb)
+pybind11_add_module(geodbcpp PyModule.cpp)
+target_link_libraries(geodbcpp PRIVATE geodb)
 
 #install(TARGETS geodb COMPONENT python LIBRARY DESTINATION "${PYTHON_LIBRARY_DIR}")
 
@@ -27,8 +27,8 @@ if (DEFINED $ENV{PYTHON_DIST_DIR})
     set(PYTHON_DIST_DIR $ENV{PYTHON_DIST_DIR})
 endif ()
 
-add_custom_command(TARGET geodbpy POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:geodbpy> ${PYTHON_DIST_DIR})
+add_custom_command(TARGET geodbcpp POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:geodbcpp> ${PYTHON_DIST_DIR})
 
 
 # Also copy our C++ shared lib to ${PYTHON_DIST_DIR}, which must be in unix env $LD_LIBRARY_PATH
