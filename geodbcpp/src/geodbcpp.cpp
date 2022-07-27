@@ -1,11 +1,15 @@
+#include "geodbcpp.h"
 #include <math.h>
 #include <tuple>
-#include <torch/extension.h>
 #include <chrono>
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <thread>
 #include <future>
+#include <torch/csrc/autograd/variable.h>
+#include <torch/csrc/autograd/function.h>
+#include <ATen/ATen.h>
+#include <torch/nn/functional.h>
 using namespace std;
 namespace F = torch::nn::functional;
 
@@ -87,7 +91,8 @@ void loss_for_neighbors_async(torch::Tensor neighbors, torch::Tensor neighbor_la
 }
 
 torch::Tensor loss_for_neighbors(torch::Tensor neighbors, torch::Tensor neighbor_labels, torch::Tensor y, torch::Tensor np_class) {
-    py::gil_scoped_release release;
+    // TODO fix te py gil
+//    py::gil_scoped_release release;
 //    std::promise<torch::Tensor> promiseObj;
 //    std::future<torch::Tensor> futureObj = promiseObj.get_future();
 //    std::thread th(loss_for_neighbors_async, neighbors, neighbor_labels, y, np_class, &promiseObj);

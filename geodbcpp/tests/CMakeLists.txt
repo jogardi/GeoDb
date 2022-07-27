@@ -1,5 +1,6 @@
-include(ExternalProject)
 
+find_package(Torch REQUIRED)
+include_directories(${CMAKE_SOURCE_DIR}/src)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -14,7 +15,7 @@ FetchContent_MakeAvailable(googletest)
 
 file(GLOB SRCS *.cpp)
 add_executable(testgeodb ${SRCS})
-target_link_libraries(testgeodb geodb GTest::gtest_main)
+target_link_libraries(testgeodb geodb GTest::gtest_main "${TORCH_LIBRARIES}")
 
 include(GoogleTest)
 gtest_discover_tests(testgeodb)
