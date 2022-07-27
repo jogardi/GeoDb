@@ -1,5 +1,5 @@
 #include <pybind11/stl.h>
-#include "src/geodbcpp.cpp"
+#include "src/geodbcpp.h"
 
 PYBIND11_MODULE(geodbcpp, m) {
 
