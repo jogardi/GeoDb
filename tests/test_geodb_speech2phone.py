@@ -8,7 +8,7 @@ from adam.speaker_id import SpeakerVoiceEmbedder
 
 
 class MyTestCase(unittest.TestCase):
-    def test_something(self):
+    def test_untrained(self):
         data, labels = adam_res.speech2phone_labeled(512)
         data_flat = data.view(data.shape[0], -1)
         ntrain = 450
@@ -26,12 +26,17 @@ class MyTestCase(unittest.TestCase):
                 nearest_neighbor_i = dists.argmin()
                 is_correct = labels[sample_i] == labels[nearest_neighbor_i]
                 if is_correct:
+                    dists[nearest_neighbor_i].backward(retain_graph=True)
                     tot_corrrect += 1
+                else:
+                    (-dists[nearest_neighbor_i]).backward(retain_graph=True)
                 tot += 1
 
             # loss = nn.CrossEntropyLoss()(model(data_flat), labels)
             opt.step()
             opt.zero_grad()
+            if ii % 2 == 0:
+                print(f"Accuracy: ii, {tot_corrrect / tot}")
         print(f"Accuracy: {tot_corrrect / tot}")
 
 
