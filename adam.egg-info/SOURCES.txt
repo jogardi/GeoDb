@@ -3,4 +3,5 @@ setup.py
 adam.egg-info/PKG-INFO
 adam.egg-info/SOURCES.txt
 adam.egg-info/dependency_links.txt
+adam.egg-info/requires.txt
 adam.egg-info/top_level.txt

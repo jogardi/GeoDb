@@ -2,7 +2,6 @@
 #include "src/geodbcpp.h"
 
 PYBIND11_MODULE(geodbcpp, m) {
-
     m.def("multivariate_normal", &multivariate_normal, "multivariate_normal");
     m.def("calc_cov", &calc_cov, "calc_cov");
     m.def("loss_for_neighbors", &loss_for_neighbors, "loss_for_neighbors");

@@ -67,7 +67,7 @@ torch::Tensor estimate_densities(torch::Tensor neighbors, torch::Tensor ys) {
 }
 
 
-torch::Tensor loss_for_neighbors_block(torch::Tensor neighbors, torch::Tensor neighbor_labels, torch::Tensor y, torch::Tensor np_class) {
+torch::Tensor loss_for_neighbors_block(const torch::Tensor& neighbors, const torch::Tensor& neighbor_labels, const torch::Tensor& y, torch::Tensor np_class) {
     if (neighbors.size(0) == 0) {
         cout << "empty" << endl;
         return torch::zeros({1})[0];
@@ -87,11 +87,11 @@ torch::Tensor loss_for_neighbors_block(torch::Tensor neighbors, torch::Tensor ne
     // return -100 * p / (5;
 }
 
-void loss_for_neighbors_async(torch::Tensor neighbors, torch::Tensor neighbor_labels, torch::Tensor y, torch::Tensor np_class, std::promise<torch::Tensor> *promObj) {
+void loss_for_neighbors_async(const torch::Tensor& neighbors, torch::Tensor neighbor_labels, torch::Tensor y, torch::Tensor np_class, std::promise<torch::Tensor> *promObj) {
     promObj->set_value(loss_for_neighbors_block(neighbors, neighbor_labels, y, np_class));
 }
 
-torch::Tensor loss_for_neighbors(torch::Tensor neighbors, torch::Tensor neighbor_labels, torch::Tensor y, torch::Tensor np_class) {
+torch::Tensor loss_for_neighbors(const torch::Tensor& neighbors, torch::Tensor neighbor_labels, torch::Tensor y, torch::Tensor np_class) {
     py::gil_scoped_release release;
 //    std::promise<torch::Tensor> promiseObj;
 //    std::future<torch::Tensor> futureObj = promiseObj.get_future();

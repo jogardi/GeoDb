@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
+set(CMAKE_BUILD_TYPE Debug)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -8,14 +9,15 @@ enable_testing()
 
 include_directories(/usr/local/include)
 
+find_package(Python REQUIRED COMPONENTS Development Interpreter)
+find_package(torch REQUIRED)
 find_package(pybind11 REQUIRED)
-find_package(Torch REQUIRED)
-find_package(Python REQUIRED COMPONENTS Development)
+message(STATUS "CPLUS_INCLUDE_PATH: $ENV{CPLUS_INCLUDE_PATH}")
 
 file(GLOB SOURCES "src/**")
 
 add_library(geodb ${SOURCES})
-target_link_libraries(geodb PUBLIC "${TORCH_LIBRARIES}" Python::Python)
+target_link_libraries(geodb PUBLIC "${TORCH_LIBRARIES}" pybind11::embed)
 pybind11_add_module(geodbcpp PyModule.cpp)
 target_link_libraries(geodbcpp PRIVATE geodb)
 
