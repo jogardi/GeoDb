@@ -30,6 +30,7 @@ class Resources:
     data_dir = utils.mkdir(f"{adam_dir}/data")
     cache_dir = utils.mkdir(f"{adam_dir}/cache")
     memcache = joblib.Memory(f"{cache_dir}/joblib", verbose=1)
+    models_dir = utils.mkdir(f"{adam_dir}/models")
 
     def __init__(self):
         global speech2phone_labelednp
@@ -68,6 +69,13 @@ class Resources:
 
     def speech2phone_labeled(self, num: int) -> Tuple[torch.Tensor, torch.Tensor]:
         paths = list(itertools.islice(self.speech2phoneprocessed(), num))
+        labels = torch.tensor(list(map(speaker_id_in_path, paths)))
+        unique_labels = torch.unique(labels).tolist()
+        fixed_labels = torch.tensor([unique_labels.index(label) for label in labels])
+        return torch.stack(speech2phone_labelednp(paths)), fixed_labels
+
+    def speech2phone_labeled_all(self) -> Tuple[torch.Tensor, torch.Tensor]:
+        paths = list(self.speech2phoneprocessed())
         labels = torch.tensor(list(map(speaker_id_in_path, paths)))
         unique_labels = torch.unique(labels).tolist()
         fixed_labels = torch.tensor([unique_labels.index(label) for label in labels])
