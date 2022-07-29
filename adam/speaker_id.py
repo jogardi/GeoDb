@@ -9,5 +9,6 @@ class SpeakerVoiceEmbedder(nn.Module):
 
     def forward(self, x):
         out = self.base(x)
-        out_length = torch.norm(out, p=2, dim=1).detach()
+        return out / torch.norm(out, p=2, dim=0)
+        # out_length = torch.norm(out, p=2, dim=1).detach()
         return (out.T / out_length.T).T

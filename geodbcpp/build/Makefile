@@ -68,13 +68,47 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp
+CMAKE_SOURCE_DIR = /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build
+CMAKE_BINARY_DIR = /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build
 
 #=============================================================================
 # Targets provided globally by CMake.
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/Applications/CMake.app/Contents/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/Applications/CMake.app/Contents/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/Applications/CMake.app/Contents/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/Applications/CMake.app/Contents/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -86,6 +120,29 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/Applications/CMake.app/Contents/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/Applications/CMake.app/Contents/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/Applications/CMake.app/Contents/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -100,9 +157,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build/CMakeFiles /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/CMakeFiles /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -143,32 +200,72 @@ geodbcpp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodbcpp.dir/build.make CMakeFiles/geodbcpp.dir/build
 .PHONY : geodbcpp/fast
 
-geodbcpp.o: geodbcpp.cpp.o
+#=============================================================================
+# Target rules for targets named geodb
 
-.PHONY : geodbcpp.o
+# Build rule for target.
+geodb: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 geodb
+.PHONY : geodb
+
+# fast build rule for target.
+geodb/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodb.dir/build.make CMakeFiles/geodb.dir/build
+.PHONY : geodb/fast
+
+PyModule.o: PyModule.cpp.o
+
+.PHONY : PyModule.o
 
 # target to build an object file
-geodbcpp.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodbcpp.dir/build.make CMakeFiles/geodbcpp.dir/geodbcpp.cpp.o
-.PHONY : geodbcpp.cpp.o
+PyModule.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodbcpp.dir/build.make CMakeFiles/geodbcpp.dir/PyModule.cpp.o
+.PHONY : PyModule.cpp.o
 
-geodbcpp.i: geodbcpp.cpp.i
+PyModule.i: PyModule.cpp.i
 
-.PHONY : geodbcpp.i
+.PHONY : PyModule.i
 
 # target to preprocess a source file
-geodbcpp.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodbcpp.dir/build.make CMakeFiles/geodbcpp.dir/geodbcpp.cpp.i
-.PHONY : geodbcpp.cpp.i
+PyModule.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodbcpp.dir/build.make CMakeFiles/geodbcpp.dir/PyModule.cpp.i
+.PHONY : PyModule.cpp.i
 
-geodbcpp.s: geodbcpp.cpp.s
+PyModule.s: PyModule.cpp.s
 
-.PHONY : geodbcpp.s
+.PHONY : PyModule.s
 
 # target to generate assembly for a file
-geodbcpp.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodbcpp.dir/build.make CMakeFiles/geodbcpp.dir/geodbcpp.cpp.s
-.PHONY : geodbcpp.cpp.s
+PyModule.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodbcpp.dir/build.make CMakeFiles/geodbcpp.dir/PyModule.cpp.s
+.PHONY : PyModule.cpp.s
+
+src/geodbcpp.o: src/geodbcpp.cpp.o
+
+.PHONY : src/geodbcpp.o
+
+# target to build an object file
+src/geodbcpp.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodb.dir/build.make CMakeFiles/geodb.dir/src/geodbcpp.cpp.o
+.PHONY : src/geodbcpp.cpp.o
+
+src/geodbcpp.i: src/geodbcpp.cpp.i
+
+.PHONY : src/geodbcpp.i
+
+# target to preprocess a source file
+src/geodbcpp.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodb.dir/build.make CMakeFiles/geodb.dir/src/geodbcpp.cpp.i
+.PHONY : src/geodbcpp.cpp.i
+
+src/geodbcpp.s: src/geodbcpp.cpp.s
+
+.PHONY : src/geodbcpp.s
+
+# target to generate assembly for a file
+src/geodbcpp.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodb.dir/build.make CMakeFiles/geodb.dir/src/geodbcpp.cpp.s
+.PHONY : src/geodbcpp.cpp.s
 
 # Help Target
 help:
@@ -177,11 +274,20 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... test"
+	@echo "... geodb"
 	@echo "... geodbcpp"
-	@echo "... geodbcpp.o"
-	@echo "... geodbcpp.i"
-	@echo "... geodbcpp.s"
+	@echo "... PyModule.o"
+	@echo "... PyModule.i"
+	@echo "... PyModule.s"
+	@echo "... src/geodbcpp.o"
+	@echo "... src/geodbcpp.i"
+	@echo "... src/geodbcpp.s"
 .PHONY : help
 
 

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/geodbcpp.dir/geodbcpp.cpp.o"
-  "geodbcpp"
+  "CMakeFiles/geodbcpp.dir/PyModule.cpp.o"
+  "geodbcpp.cpython-39-darwin.so"
   "geodbcpp.pdb"
 )
 

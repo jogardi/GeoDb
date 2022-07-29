@@ -64,16 +64,17 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp
+CMAKE_SOURCE_DIR = /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build
+CMAKE_BINARY_DIR = /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
 all: CMakeFiles/geodbcpp.dir/all
+all: CMakeFiles/geodb.dir/all
 
 .PHONY : all
 
@@ -84,6 +85,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/geodbcpp.dir/clean
+clean: CMakeFiles/geodb.dir/clean
 
 .PHONY : clean
 
@@ -91,17 +93,17 @@ clean: CMakeFiles/geodbcpp.dir/clean
 # Target rules for target CMakeFiles/geodbcpp.dir
 
 # All Build rule for target.
-CMakeFiles/geodbcpp.dir/all:
+CMakeFiles/geodbcpp.dir/all: CMakeFiles/geodb.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodbcpp.dir/build.make CMakeFiles/geodbcpp.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodbcpp.dir/build.make CMakeFiles/geodbcpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build/CMakeFiles --progress-num=1,2 "Built target geodbcpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/CMakeFiles --progress-num=3,4 "Built target geodbcpp"
 .PHONY : CMakeFiles/geodbcpp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/geodbcpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/geodbcpp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/CMakeFiles 0
 .PHONY : CMakeFiles/geodbcpp.dir/rule
 
 # Convenience name for target.
@@ -113,6 +115,33 @@ geodbcpp: CMakeFiles/geodbcpp.dir/rule
 CMakeFiles/geodbcpp.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodbcpp.dir/build.make CMakeFiles/geodbcpp.dir/clean
 .PHONY : CMakeFiles/geodbcpp.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/geodb.dir
+
+# All Build rule for target.
+CMakeFiles/geodb.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodb.dir/build.make CMakeFiles/geodb.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodb.dir/build.make CMakeFiles/geodb.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/CMakeFiles --progress-num=1,2 "Built target geodb"
+.PHONY : CMakeFiles/geodb.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/geodb.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/geodb.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/CMakeFiles 0
+.PHONY : CMakeFiles/geodb.dir/rule
+
+# Convenience name for target.
+geodb: CMakeFiles/geodb.dir/rule
+
+.PHONY : geodb
+
+# clean rule for target.
+CMakeFiles/geodb.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/geodb.dir/build.make CMakeFiles/geodb.dir/clean
+.PHONY : CMakeFiles/geodb.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

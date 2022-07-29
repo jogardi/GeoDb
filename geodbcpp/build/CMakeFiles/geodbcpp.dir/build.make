@@ -63,10 +63,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp
+CMAKE_SOURCE_DIR = /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build
+CMAKE_BINARY_DIR = /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/geodbcpp.dir/depend.make
@@ -77,38 +77,42 @@ include CMakeFiles/geodbcpp.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/geodbcpp.dir/flags.make
 
-CMakeFiles/geodbcpp.dir/geodbcpp.cpp.o: CMakeFiles/geodbcpp.dir/flags.make
-CMakeFiles/geodbcpp.dir/geodbcpp.cpp.o: ../geodbcpp.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/geodbcpp.dir/geodbcpp.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/geodbcpp.dir/geodbcpp.cpp.o -c /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/geodbcpp.cpp
+CMakeFiles/geodbcpp.dir/PyModule.cpp.o: CMakeFiles/geodbcpp.dir/flags.make
+CMakeFiles/geodbcpp.dir/PyModule.cpp.o: ../PyModule.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/geodbcpp.dir/PyModule.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/geodbcpp.dir/PyModule.cpp.o -c /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/PyModule.cpp
 
-CMakeFiles/geodbcpp.dir/geodbcpp.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/geodbcpp.dir/geodbcpp.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/geodbcpp.cpp > CMakeFiles/geodbcpp.dir/geodbcpp.cpp.i
+CMakeFiles/geodbcpp.dir/PyModule.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/geodbcpp.dir/PyModule.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/PyModule.cpp > CMakeFiles/geodbcpp.dir/PyModule.cpp.i
 
-CMakeFiles/geodbcpp.dir/geodbcpp.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/geodbcpp.dir/geodbcpp.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/geodbcpp.cpp -o CMakeFiles/geodbcpp.dir/geodbcpp.cpp.s
+CMakeFiles/geodbcpp.dir/PyModule.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/geodbcpp.dir/PyModule.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/PyModule.cpp -o CMakeFiles/geodbcpp.dir/PyModule.cpp.s
 
 # Object files for target geodbcpp
 geodbcpp_OBJECTS = \
-"CMakeFiles/geodbcpp.dir/geodbcpp.cpp.o"
+"CMakeFiles/geodbcpp.dir/PyModule.cpp.o"
 
 # External object files for target geodbcpp
 geodbcpp_EXTERNAL_OBJECTS =
 
-geodbcpp: CMakeFiles/geodbcpp.dir/geodbcpp.cpp.o
-geodbcpp: CMakeFiles/geodbcpp.dir/build.make
-geodbcpp: /Users/joeyg/docs/workspace/libtorch/lib/libc10.dylib
-geodbcpp: /Users/joeyg/docs/workspace/libtorch/lib/libtorch.dylib
-geodbcpp: /Users/joeyg/docs/workspace/libtorch/lib/libtorch_cpu.dylib
-geodbcpp: /Users/joeyg/docs/workspace/libtorch/lib/libc10.dylib
-geodbcpp: CMakeFiles/geodbcpp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable geodbcpp"
+geodbcpp.cpython-39-darwin.so: CMakeFiles/geodbcpp.dir/PyModule.cpp.o
+geodbcpp.cpython-39-darwin.so: CMakeFiles/geodbcpp.dir/build.make
+geodbcpp.cpython-39-darwin.so: libgeodb.a
+geodbcpp.cpython-39-darwin.so: /Users/joeyg/docs/workspace/libtorch/lib/libtorch.dylib
+geodbcpp.cpython-39-darwin.so: /Users/joeyg/docs/workspace/libtorch/lib/libtorch_cpu.dylib
+geodbcpp.cpython-39-darwin.so: /Users/joeyg/docs/workspace/libtorch/lib/libc10.dylib
+geodbcpp.cpython-39-darwin.so: /Users/joeyg/docs/workspace/libtorch/lib/libc10.dylib
+geodbcpp.cpython-39-darwin.so: /Users/joeyg/docs/workspace/libtorch/lib/libkineto.a
+geodbcpp.cpython-39-darwin.so: /usr/local/opt/python@3.9/Frameworks/Python.framework/Versions/3.9/lib/libpython3.9.dylib
+geodbcpp.cpython-39-darwin.so: CMakeFiles/geodbcpp.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared module geodbcpp.cpython-39-darwin.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/geodbcpp.dir/link.txt --verbose=$(VERBOSE)
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip -x /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/geodbcpp.cpython-39-darwin.so
 
 # Rule to build all files generated by this target.
-CMakeFiles/geodbcpp.dir/build: geodbcpp
+CMakeFiles/geodbcpp.dir/build: geodbcpp.cpython-39-darwin.so
 
 .PHONY : CMakeFiles/geodbcpp.dir/build
 
@@ -117,6 +121,6 @@ CMakeFiles/geodbcpp.dir/clean:
 .PHONY : CMakeFiles/geodbcpp.dir/clean
 
 CMakeFiles/geodbcpp.dir/depend:
-	cd /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build /Users/joeyg/Dropbox/Documents/dasion/geodb/geodbcpp/build/CMakeFiles/geodbcpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build /Users/joeyg/Dropbox/Documents/workspace/GeoDb/geodbcpp/build/CMakeFiles/geodbcpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/geodbcpp.dir/depend
 
